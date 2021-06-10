@@ -1,10 +1,19 @@
 .App {
   text-align: center;
+  padding: 5rem;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.PubContainer{
+  border-color: #282c34;
+  border-radius: 5px;
+  padding: 2rem;
+  margin: auto;
+  text-align: left;
 }
 
 @media (prefers-reduced-motion: no-preference) {
