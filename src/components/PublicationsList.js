@@ -10,77 +10,34 @@ class PublicationsList extends React.Component{
       const Res = fetch('http://localhost:8000/api/publications/', {
                 method: 'GET',
                 headers: {
-                  Authorization: `bearer ${localStorage.getItem('token')}`
+                  Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
               })
                 .then(res => res.json())
                 .then(json => {
                     //console.log(json);
-                    this.state.Posts = json
-                    console.log(this.state.Posts)
+                    this.setState({...this.state, Posts: json})
+                    //console.log(this.state.Posts)
                     return json
                 })
   };
 
   render() {
       //console.log(this.state.data)
+      console.log(this.state.Posts)
       const publl = this.state.Posts?.map((pub, i) => (
-    <li key={i} className="list-group-item">{pub.title}</li>
+          <div key={pub.pk}>
+    <h3>{pub.title}</h3>
+    <p>{pub.content}</p>
+    <p>Понравилось {pub.total_likes}</p>
+    <p>Создана {pub.created}</p>
+          </div>
   ));
       return(<div>
-      <ul className="list-group list-group-flush">
         {publl}
-      </ul>
       </div>)
   }
 }
-
-
-  // render() {
-  //           console.log("get pubs");
-  //             fetch('http://localhost:8000/api/publications/', {
-  //               method: 'GET',
-  //               headers: {
-  //                 Authorization: `bearer ${localStorage.getItem('token')}`
-  //               }
-  //             })
-  //               .then(res => res.json())
-  //               .then(json => {
-  //                 console.log(json);
-  //                 return json
-  //               });
-  //           return (<div>
-  //               {json.map((value, index) => {
-  //               return <li key={index}>{value}</li>
-  //               })}
-  //           </div>);
-  //         }
-  //       }
-
-// get_publications = items => {
-//     console.log("get pubs");
-//     console.log(this.state.logged_in);
-//     if (this.state.logged_in === true) {
-//       fetch('http://localhost:8000/api/publications/', {
-//         method: 'GET',
-//         headers: {
-//           Authorization: `bearer ${localStorage.getItem('token')}`
-//         }
-//       })
-//         .then(res => res.json())
-//         .then(json => {
-//           console.log(json);
-//           const pubs = json;
-//           return(
-//             <ul>
-//               {pubs.map((value, index) => {
-//                 return <li key={index}>{value}</li>
-//               })}
-//             </ul>
-//           )
-//         });
-//     }
-//   }
 
 export default PublicationsList;
 
